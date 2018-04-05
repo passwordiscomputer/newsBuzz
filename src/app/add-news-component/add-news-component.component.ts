@@ -24,7 +24,7 @@ export class AddNewsComponentComponent implements OnInit {
       }
     })
   }
-
+  //add sources to list to make query for api request
   onCheck(source, isChecked: boolean) {
     if(isChecked) {
       this.sourceUrls.push(source);
