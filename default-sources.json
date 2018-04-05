@@ -1,0 +1,37 @@
+{
+  "sources": [{
+      "name": "BloomBerg",
+      "url": "bloomberg.com",
+      "description": "Bloomberg delivers business and markets news, data, analysis, and video to the world, featuring stories from Businessweek and Bloomberg News.",
+      "categories": [
+        "Business",
+        "Politics"
+      ]
+    }, {
+      "name": "Wall Street Journal",
+      "url": "wsj.com",
+      "description": "The Wall Street Journal is an American business-focused, English-language international daily newspaper based in New York City.",
+      "categories": [
+        "Business",
+        "Politics",
+        "General"
+      ]
+    }, {
+      "name": "Economist",
+      "url": "economist.com",
+      "description": "The Economist offers authoritative insight and opinion on international news, politics, business, finance, science, technology and the connections between them.",
+      "categories": [
+        "Business",
+        "Politics",
+        "Tech"
+      ]
+    }, {
+      "name": "Tech Crunch",
+      "url": "techcrunch.com",
+      "description": "The Economist offers authoritative insight and opinion on international news, politics, business, finance, science, technology and the connections between them.",
+      "categories": [
+        "Tech"
+      ]
+    }
+  ]
+}
