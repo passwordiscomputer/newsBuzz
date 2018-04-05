@@ -9,7 +9,9 @@ import { FirebaseListObservable } from 'angularfire2/database';
   providers: [SourceService]
 })
 export class AddNewsComponentComponent implements OnInit {
-  sources;
+  sources: Source[] = [];
+  sourceUrls: Source[] = [];
+  filterByCategory: string = "";
   constructor(private sourceService: SourceService) { }
 
   categories =
@@ -17,10 +19,28 @@ export class AddNewsComponentComponent implements OnInit {
 
   ngOnInit() {
     this.sourceService.getSources().subscribe(dataLastEmittedFromObserver => {
-      this.sources = dataLastEmittedFromObserver;
-
-      console.log(this.sources);
+      for (let source of dataLastEmittedFromObserver) {
+        this.sources.push(new Source(source.name, source.url, source.description, source.categories))
+      }
     })
+  }
+
+  onCheck(source, isChecked: boolean) {
+    if(isChecked) {
+      this.sourceUrls.push(source);
+      console.log(this.sourceUrls);
+    }else{
+      for(var i = 0; i < this.sourceUrls.length; i++){
+        if(this.sourceUrls[i].name == source.name){
+          this.sourceUrls.splice(i,1);
+        }
+      }
+      console.log(this.sourceUrls);
+    }
+  }
+
+  onCategoryChange(optionFromMenu) {
+    this.filterByCategory = optionFromMenu;
   }
 
 }

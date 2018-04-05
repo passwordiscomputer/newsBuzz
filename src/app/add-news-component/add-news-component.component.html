@@ -4,11 +4,11 @@
 </select>
 
 
-<div *ngFor="let source of sources">
-  <div>
-    <h3><em>{{source.name}}</em></h3>
-  </div>
+<div *ngFor="let source of sources | category:filterByCategory">
+  <input type="checkbox" (change)="onCheck(source, $event.target.checked)"> {{source.name}}<br>
 </div>
+
+<button (click)="getSelectedSources()" type="button" name="button"></button>
 <!-- <ul>
 <li *ngFor="let source of childSourceList | completeness:filterByCategory">{{source.name}}</li>
 </ul> -->
