@@ -19,7 +19,7 @@ export class AddNewsComponentComponent implements OnInit {
 
   categories =
     ["Business", "Tech", "Politics"];
-
+  
   ngOnInit() {
     this.sourceService.getSources().subscribe(dataLastEmittedFromObserver => {
       for (let source of dataLastEmittedFromObserver) {
@@ -44,6 +44,7 @@ export class AddNewsComponentComponent implements OnInit {
   //change category
   onCategoryChange(optionFromMenu) {
     this.filterByCategory = optionFromMenu;
+    this.sourceUrls = []
   }
 
   //submit form to make a new query object and send it to fb
