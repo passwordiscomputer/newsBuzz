@@ -6,15 +6,16 @@ import { HttpParams } from '@angular/common/http';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-
-  params = { "$query": { "$and": [{ "categoryUri": { "$and": ["dmoz/Society/Politics"] } }, { "$or": [{ "sourceUri": "bloomberg.com" }, { "sourceUri": "washingtonpost.com" }] }] }, "$filter": {} };
+  keywords = ["Donald Trump"];
+  categories = ["dmoz/Society/Politics"]
+  sources = [{"sourceUri":"wsj.com"},{"sourceUri":"washingtonpost.com"}]
+  params = {"$query":{"$and":[{"keyword":{"$and":this.keywords}},{"categoryUri":{"$and":this.categories}},{"$or":this.sources},{"lang":"eng"}]},"$filter":{}};
   url = `http://eventregistry.org/json/article?query=${JSON.stringify(this.params)}&action=getArticles&resultType=articles&articlesSortBy=date&articlesCount=10&articlesArticleBodyLen=-1&apiKey=e7b30769-23df-462b-8ee1-440aa0784c21`;
 
 
 
   getData() {
-    this.params.$query.$and[1].$or.push({"sourceUri": "bloomberg"});
-    console.log(this.params.$query.$and[1].$or);
+
     this.http.get(this.url).subscribe(res => {
       console.log(res);
     });
