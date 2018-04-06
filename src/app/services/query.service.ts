@@ -14,4 +14,8 @@ export class QueryService {
     return this.queries;
   }
 
+  addQuery(newQuery: Query){
+    this.queries.push(newQuery);
+  }
+
 }
