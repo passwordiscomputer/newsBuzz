@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Source } from './models/source.model';
+import { Query } from './models/query.model';
+import { Category } from './models/category.model';
+
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +12,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+
 }
