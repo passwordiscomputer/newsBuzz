@@ -9,8 +9,9 @@ export class DataService {
   keywords = ["Donald Trump"];
   categories = ["dmoz/Society/Politics"]
   sources = [{"sourceUri":"wsj.com"},{"sourceUri":"washingtonpost.com"}]
+  page = 0;
   params = {"$query":{"$and":[{"keyword":{"$and":this.keywords}},{"categoryUri":{"$and":this.categories}},{"$or":this.sources},{"lang":"eng"}]},"$filter":{}};
-  url = `http://eventregistry.org/json/article?query=${JSON.stringify(this.params)}&action=getArticles&resultType=articles&articlesSortBy=date&articlesCount=10&articlesArticleBodyLen=-1&apiKey=e7b30769-23df-462b-8ee1-440aa0784c21`;
+  url = `http://eventregistry.org/json/article?query=${JSON.stringify(this.params)}&action=getArticles&resultType=articles&articlesSortBy=date&articlesCount=10&articlesPage=${this.page}&articlesArticleBodyLen=-1&apiKey=e7b30769-23df-462b-8ee1-440aa0784c21`;
 
 
 
