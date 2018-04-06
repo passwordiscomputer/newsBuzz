@@ -4,22 +4,24 @@ import { Query } from '../models/query.model';
 //services
 import { SourceService } from '../services/source.service';
 import { QueryService } from '../services/query.service';
+import { DataService } from '../services/data.service'
+
 import { FirebaseListObservable } from 'angularfire2/database';
 @Component({
   selector: 'app-add-news-component',
   templateUrl: './add-news-component.component.html',
   styleUrls: ['./add-news-component.component.css'],
-  providers: [SourceService, QueryService]
+  providers: [SourceService, QueryService, DataService]
 })
 export class AddNewsComponentComponent implements OnInit {
   sources: Source[] = [];
   sourceUrls: string[] = [];
   filterByCategory: string = "";
-  constructor(private sourceService: SourceService, private queryService: QueryService) { }
+  constructor(private sourceService: SourceService, private queryService: QueryService, private dataService: DataService) { }
 
   categories =
     ["Business", "Tech", "Politics"];
-  
+
   ngOnInit() {
     this.sourceService.getSources().subscribe(dataLastEmittedFromObserver => {
       for (let source of dataLastEmittedFromObserver) {
@@ -51,5 +53,6 @@ export class AddNewsComponentComponent implements OnInit {
   submitQuery(){
     let newQuery: Query = new Query(this.sourceUrls, [this.filterByCategory]);
     this.queryService.addQuery(newQuery);
+    this.dataService.getData();
   }
 }

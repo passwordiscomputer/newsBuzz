@@ -5,10 +5,40 @@ import { HttpClient } from '@angular/common/http'
 export class DataService {
 
   constructor(private http: HttpClient) { }
+  url = "http://eventregistry.org/json/article";
+
+  params = {
+    "query": {
+      "$query": {
+        "$and": [{
+          "keyword": {
+            "$and": [
+              "Politics",
+              "Mad"
+            ]
+          }
+        },
+        {
+          "categoryUri": {
+            "$and": [
+              "dmoz/Arts/Entertainment"
+            ]
+          }
+        }
+        ]
+      },
+      "$filter": {}
+    },
+    "action": "getArticles",
+    "resultType": "articles",
+    "articlesSortBy": "date",
+    "articlesCount": 100,
+    "articlesArticleBodyLen": -1
+  }
 
   getData() {
-  this.http.get(`https://newsapi.org/v2/top-headlines?q=trump&apiKey=2ed22f667ed4478ea5b9c52d36e92e4a`).subscribe(res => {
-    console.log(res)
-  });
-
+    this.http.get(this.url).subscribe(res => {
+      console.log(JSON.stringify(this.params));
+    });
+  }
 }
