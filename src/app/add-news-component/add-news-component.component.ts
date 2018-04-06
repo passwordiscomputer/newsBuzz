@@ -14,9 +14,10 @@ import { FirebaseListObservable } from 'angularfire2/database';
   providers: [SourceService, QueryService, DataService]
 })
 export class AddNewsComponentComponent implements OnInit {
+  keywords: String[] = [];
   sources: Source[] = [];
-  sourceUrls: string[] = [];
-  filterByCategory: string = "";
+  sourceUris: Object[] = [];
+  filterByCategory: String = "";
   constructor(private sourceService: SourceService, private queryService: QueryService, private dataService: DataService) { }
 
   categories =
@@ -30,28 +31,28 @@ export class AddNewsComponentComponent implements OnInit {
     })
   }
   //add sources to list to make query for api request
-  onCheck(sourceUrl, isChecked: boolean) {
+  onCheck(sourceUri, isChecked: boolean) {
     if (isChecked) {
-      this.sourceUrls.push(sourceUrl);
-      console.log(this.sourceUrls);
+      this.sourceUris.push(sourceUri);
+      console.log(this.sourceUris);
     } else {
-      for (var i = 0; i < this.sourceUrls.length; i++) {
-        if (this.sourceUrls[i] == sourceUrl) {
-          this.sourceUrls.splice(i, 1);
+      for (var i = 0; i < this.sourceUris.length; i++) {
+        if (this.sourceUris[i] == sourceUri) {
+          this.sourceUris.splice(i, 1);
         }
       }
-      console.log(this.sourceUrls);
+      console.log(this.sourceUris);
     }
   }
   //change category
   onCategoryChange(optionFromMenu) {
     this.filterByCategory = optionFromMenu;
-    this.sourceUrls = []
+    this.sourceUris = []
   }
 
   //submit form to make a new query object and send it to fb
   submitQuery(){
-    let newQuery: Query = new Query(this.sourceUrls, [this.filterByCategory]);
+    let newQuery: Query = new Query(this.sourceUris, [this.filterByCategory], this.keywords);
     this.queryService.addQuery(newQuery);
     this.dataService.getData();
   }

@@ -13,6 +13,8 @@ export class SourceService {
   getSources(){
     return this.sources;
   }
+  //function to make sour urls into objects for api parameters
+
 
 
 }
