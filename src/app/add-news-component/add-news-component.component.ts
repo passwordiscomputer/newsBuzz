@@ -10,12 +10,12 @@ import { FirebaseListObservable } from 'angularfire2/database';
 })
 export class AddNewsComponentComponent implements OnInit {
   sources: Source[] = [];
-  sourceUrls: Source[] = [];
+  sourceUrls: string[] = [];
   filterByCategory: string = "";
   constructor(private sourceService: SourceService) { }
 
   categories =
-  ["Business", "Tech", "Politics"];
+    ["Business", "Tech", "Politics"];
 
   ngOnInit() {
     this.sourceService.getSources().subscribe(dataLastEmittedFromObserver => {
@@ -25,14 +25,14 @@ export class AddNewsComponentComponent implements OnInit {
     })
   }
   //add sources to list to make query for api request
-  onCheck(source, isChecked: boolean) {
-    if(isChecked) {
-      this.sourceUrls.push(source);
+  onCheck(sourceUrl, isChecked: boolean) {
+    if (isChecked) {
+      this.sourceUrls.push(sourceUrl);
       console.log(this.sourceUrls);
-    }else{
-      for(var i = 0; i < this.sourceUrls.length; i++){
-        if(this.sourceUrls[i].name == source.name){
-          this.sourceUrls.splice(i,1);
+    } else {
+      for (var i = 0; i < this.sourceUrls.length; i++) {
+        if (this.sourceUrls[i] == sourceUrl) {
+          this.sourceUrls.splice(i, 1);
         }
       }
       console.log(this.sourceUrls);

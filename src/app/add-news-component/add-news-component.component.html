@@ -5,7 +5,7 @@
 
 
 <div *ngFor="let source of sources | category:filterByCategory">
-  <input type="checkbox" (change)="onCheck(source, $event.target.checked)"> {{source.name}}<br>
+  <input type="checkbox" (change)="onCheck(source.url, $event.target.checked)"> {{source.name}}<br>
 </div>
 
 <button (click)="clickCreate()" type="button" name="button">Create</button>
