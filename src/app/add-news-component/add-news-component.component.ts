@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 //models
 import { Source } from '../models/source.model';
 import { Query } from '../models/query.model';
@@ -16,6 +16,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
   providers: [SourceService, QueryService, DataService]
 })
 export class AddNewsComponentComponent implements OnInit {
+
   keywords: String[] = [];
   sources: Source[] = [];
   sourceUris: Object[] = [];
@@ -37,14 +38,12 @@ export class AddNewsComponentComponent implements OnInit {
   onCheck(sourceUri, isChecked: boolean) {
     if (isChecked) {
       this.sourceUris.push(sourceUri);
-      console.log(this.sourceUris);
     } else {
       for (var i = 0; i < this.sourceUris.length; i++) {
         if (this.sourceUris[i] == sourceUri) {
           this.sourceUris.splice(i, 1);
         }
       }
-      console.log(this.sourceUris);
     }
   }
   //change category
@@ -58,6 +57,5 @@ export class AddNewsComponentComponent implements OnInit {
   submitQuery(){
     let newQuery: Query = new Query(this.sourceUris, [this.categoriesKeyPairs[this.filterByCategory]], this.keywords);
     this.queryService.addQuery(newQuery);
-    this.dataService.getData();
   }
 }

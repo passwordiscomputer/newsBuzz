@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AddNewsComponentComponent } from './add-news-component/add-news-component.component';
 import { CategoryPipe } from './category-pipe.pipe';
+import { StoryHolderComponent } from './story-holder/story-holder.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -24,6 +25,7 @@ export const firebaseConfig = {
     AppComponent,
     AddNewsComponentComponent,
     CategoryPipe,
+    StoryHolderComponent,
   ],
   imports: [
     BrowserModule,

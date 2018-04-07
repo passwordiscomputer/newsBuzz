@@ -27,7 +27,7 @@ export class QueryService {
     for (let keyword of query.keywords) {
       apiUrlArray.push(this.makeUrl(query.sourceUris, "keyword", keyword));
     }
-
+    return apiUrlArray;
   }
 
   makeUrl(sourceUris, filterType, filterTerm) {

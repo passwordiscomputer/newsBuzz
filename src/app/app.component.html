@@ -2,3 +2,12 @@
 <h4>The News Site where you create your own front Page</h4>
 
 <app-add-news-component></app-add-news-component>
+
+<div class="container">
+  <div *ngFor="let query of queries" class="col-md-3">
+    <app-story-holder [childQueryData] = "query" ></app-story-holder>
+  </div>
+
+
+
+</div>

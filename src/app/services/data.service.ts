@@ -6,18 +6,12 @@ import { HttpParams } from '@angular/common/http';
 export class DataService {
 
   constructor(private http: HttpClient) { }
-  keywords = ["Donald Trump"];
-  categories = ["dmoz/Society/Politics"]
-  sources = [{"sourceUri":"wsj.com"},{"sourceUri":"washingtonpost.com"}]
-  page = 0;
-  params = {"$query":{"$and":[{"keyword":{"$and":this.keywords}},{"categoryUri":{"$and":this.categories}},{"$or":this.sources},{"lang":"eng"}]},"$filter":{}};
-  url = `http://eventregistry.org/json/article?query=${JSON.stringify(this.params)}&action=getArticles&resultType=articles&articlesSortBy=date&articlesCount=10&articlesPage=${this.page}&articlesArticleBodyLen=-1&apiKey=e7b30769-23df-462b-8ee1-440aa0784c21`;
 
 
 
-  getData() {
 
-    this.http.get(this.url).subscribe(res => {
+  getData(url) {
+    this.http.get().subscribe(res => {
       console.log(res);
     });
   }
