@@ -25,6 +25,7 @@ export class AddNewsComponentComponent implements OnInit {
   categories =
     [new Category("Business", "dmoz/Business"), new Category("Tech","dmoz/Science/Technology"), new Category("Politics","dmoz/Society/Politics")];
   categoriesKeyPairs = { "Business":"dmoz/Business", "Tech":"dmoz/Science/Technology", "Politics":"dmoz/Society/Politics"}
+
   ngOnInit() {
     this.sourceService.getSources().subscribe(dataLastEmittedFromObserver => {
       for (let source of dataLastEmittedFromObserver) {

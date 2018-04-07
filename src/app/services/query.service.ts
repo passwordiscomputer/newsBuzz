@@ -10,7 +10,7 @@ export class QueryService {
     this.queries = database.list('queries');
   }
 
-  getSources() {
+  getQueries() {
     return this.queries;
   }
 
