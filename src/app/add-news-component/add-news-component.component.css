@@ -1,0 +1,14 @@
+.checkform{
+  padding: 0px 3px;
+  border: 1px black solid;
+  border-radius: 3px;
+  margin: 2px;
+}
+.checkform label{
+  margin-bottom: 0;
+}
+
+.checkboxes{
+  margin: 10px;
+  width: 60%;
+}

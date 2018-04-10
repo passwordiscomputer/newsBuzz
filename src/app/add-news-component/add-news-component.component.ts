@@ -20,31 +20,34 @@ export class AddNewsComponentComponent implements OnInit {
   keywords: String[] = [];
   sources: Source[] = [];
   sourceUris: Object[] = [];
-  filterByCategory: String = "";
+  filterByCategory: string[]= [];
   constructor(private sourceService: SourceService, private queryService: QueryService, private dataService: DataService) { }
 
   categories =
-    [new Category("Business", "dmoz/Business"), new Category("Tech","dmoz/Science/Technology"), new Category("Politics","dmoz/Society/Politics")];
-  categoriesKeyPairs = { "Business":"dmoz/Business", "Tech":"dmoz/Science/Technology", "Politics":"dmoz/Society/Politics"}
+    [new Category("business", "dmoz/Business"), new Category("technology","dmoz/Science/Technology"), new Category("politics","dmoz/Society/Politics"), new Category("entertainment","dmoz/Arts/Entertainment")];
+  categoriesKeyPairs = { "business":"dmoz/Business", "technology":"dmoz/Science/Technology", "politics":"dmoz/Society/Politics", "entertainment":"dmoz/Arts/Entertainment"}
 
+  categoryQueryArray: string[] = [];
   ngOnInit() {
+
     this.sourceService.getSources().subscribe(dataLastEmittedFromObserver => {
       for (let source of dataLastEmittedFromObserver) {
-        this.sources.push(new Source(source.name, source.url, source.description, source.categories))
+        this.sources.push(new Source(source.name, source.url, source.categories))
       }
     })
   }
   //add sources to list to make query for api request
-  onCheck(sourceUri, isChecked: boolean) {
+  onCheck(array, input, isChecked: boolean) {
     if (isChecked) {
-      this.sourceUris.push(sourceUri);
+      array.push(input);
     } else {
-      for (var i = 0; i < this.sourceUris.length; i++) {
-        if (this.sourceUris[i] == sourceUri) {
-          this.sourceUris.splice(i, 1);
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] == input) {
+          array.splice(i, 1);
         }
       }
     }
+    console.log(array);
   }
   //change category
   onCategoryChange(optionFromMenu) {
@@ -55,7 +58,7 @@ export class AddNewsComponentComponent implements OnInit {
 
   //submit form to make a new query object and send it to fb
   submitQuery(){
-    let newQuery: Query = new Query(this.sourceUris, [this.categoriesKeyPairs[this.filterByCategory]], this.keywords);
+    let newQuery: Query = new Query(this.sourceUris, this.categoryQueryArray, this.keywords);
     this.queryService.addQuery(newQuery);
   }
 }

@@ -2,11 +2,20 @@
 <select (change)="onCategoryChange($event.target.value)">
     <option *ngFor="let category of categories" value="{{category.name}}"  >{{category.name}}</option>
 </select>
-
-
-<div *ngFor="let source of sources | category:filterByCategory">
-  <input type="checkbox" (change)="onCheck(source.uri, $event.target.checked)"> {{source.name}}<br>
+<div class="row checkboxes">
+  <div class="checkform" *ngFor="let source of sources | category:filterByCategory">
+    <input type="checkbox" (change)="onCheck(sourceUris, source.uri, $event.target.checked)">
+    <label>{{source.name}}</label>
+  </div>
 </div>
+
+<div class="row checkboxes">
+  <div class="checkform" *ngFor="let category of categories">
+    <input type="checkbox" (change)="onCheck(categoryQueryArray, category.apiTerm, $event.target.checked)">
+    <label>{{category.name}}</label>
+  </div>
+</div>
+
 
 <button (click)="submitQuery()" type="button" name="button">Create</button>
 <!-- <ul>
