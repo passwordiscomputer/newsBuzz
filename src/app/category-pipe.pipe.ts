@@ -8,6 +8,9 @@ import { Source } from './models/source.model'
 
 export class CategoryPipe implements PipeTransform {
   transform(input: Source[], desiredCategory) {
+    if (desiredCategory == "all") {
+      return input;
+    }
     var output: Source[] = [];
     for (var i = 0; i < input.length; i++) {
       if (input[i].categories.includes(desiredCategory)) {

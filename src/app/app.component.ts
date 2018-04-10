@@ -16,6 +16,8 @@ import { FirebaseListObservable } from 'angularfire2/database';
 })
 export class AppComponent {
   queries = <any>[];
+  addNewArticleClicked = false;
+  buttonText = "Add news components"
   constructor(private queryService: QueryService){
   }
 
@@ -25,6 +27,13 @@ export class AppComponent {
     })
 
   }
+
+  addButtonClicked(){
+    this.addNewArticleClicked = !this.addNewArticleClicked;
+    this.buttonText = this.addNewArticleClicked ?  "Done adding" : "Add news components";
+  }
+
+  
 
 
 }

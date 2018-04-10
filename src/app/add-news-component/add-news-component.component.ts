@@ -20,12 +20,12 @@ export class AddNewsComponentComponent implements OnInit {
   keywords: String[] = [];
   sources: Source[] = [];
   sourceUris: Object[] = [];
-  filterByCategory: string[]= [];
+  filterByCategory: string[]= ["all"];
   constructor(private sourceService: SourceService, private queryService: QueryService, private dataService: DataService) { }
 
   categories =
-    [new Category("business", "dmoz/Business"), new Category("technology","dmoz/Science/Technology"), new Category("politics","dmoz/Society/Politics"), new Category("entertainment","dmoz/Arts/Entertainment")];
-  categoriesKeyPairs = { "business":"dmoz/Business", "technology":"dmoz/Science/Technology", "politics":"dmoz/Society/Politics", "entertainment":"dmoz/Arts/Entertainment"}
+    [new Category("business", "dmoz/Business"), new Category("technology","dmoz/Science/Technology"), new Category("politics","dmoz/Society/Politics"), new Category("entertainment","dmoz/Arts/Entertainment"), new Category("sports", "dmoz/Sports")];
+  // categoriesKeyPairs = { "business":"dmoz/Business", "technology":"dmoz/Science/Technology", "politics":"dmoz/Society/Politics", "entertainment":"dmoz/Arts/Entertainment"}
 
   categoryQueryArray: string[] = [];
   ngOnInit() {
@@ -59,6 +59,12 @@ export class AddNewsComponentComponent implements OnInit {
   //submit form to make a new query object and send it to fb
   submitQuery(){
     let newQuery: Query = new Query(this.sourceUris, this.categoryQueryArray, this.keywords);
+
     this.queryService.addQuery(newQuery);
+  }
+
+  //keyword Input
+  addKeyword(newKeyword){
+    this.keywords.push(newKeyword);
   }
 }

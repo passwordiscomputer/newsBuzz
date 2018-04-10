@@ -25,6 +25,7 @@ export class QueryService {
       apiUrlArray.push(this.makeUrl( query.sourceUris, "categoryUri", category));
     }
     for (let keyword of query.keywords) {
+      console.log(keyword);
       apiUrlArray.push(this.makeUrl(query.sourceUris, "keyword", keyword));
     }
     return apiUrlArray;
@@ -32,9 +33,17 @@ export class QueryService {
 
   makeUrl(sourceUris, filterType, filterTerm) {
     let params = { "$query": { "$and": [{ [filterType]: { "$and": [filterTerm] } }, { "$or": sourceUris }, { "lang": "eng" }] }, "$filter": {} };
-    let url = `http://eventregistry.org/json/article?query=${JSON.stringify(params)}&action=getArticles&resultType=articles&articlesSortBy=date&articlesCount=10&articlesPage=0&articlesArticleBodyLen=-1&apiKey=e7b30769-23df-462b-8ee1-440aa0784c21`;
+    let url = `http://eventregistry.org/json/article?query=${JSON.stringify(params)}&action=getArticles&resultType=articles&articlesSortBy=date&articlesCount=10&articlesPage=0&articlesArticleBodyLen=-1&apiKey=3ac20ecd-011b-45ef-8b6e-9a86408af0ec`;
     console.log(url);
     return url;
   }
 
+  deleteQuery(key){
+    var queryInFirebase = this.queryById(key);
+    queryInFirebase.remove();
+  }
+
+  queryById(queryId: string) {
+    return this.database.object('queries/' + queryId);
+  }
 }
