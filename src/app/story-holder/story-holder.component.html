@@ -1,8 +1,8 @@
-<div *ngIf="stories">
+<div class="storyHolder" *ngIf="stories[currentStoryNumber]">
   <div class="card">
     <a href="{{stories[currentStoryNumber]?.url}}"><h4 class="title">{{stories[currentStoryNumber]?.title}}</h4></a>
     <p>Source: {{stories[currentStoryNumber]?.source}} </p>
-    <p>{{stories[currentStoryNumber]?.excerpt}} </p>
+    <p>{{stories[currentStoryNumber]?.excerpt.substring(0, 150)}}... </p>
 
     <div class="row">
       <div class="col-md-4">

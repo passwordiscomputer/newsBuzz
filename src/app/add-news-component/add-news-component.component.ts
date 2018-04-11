@@ -16,7 +16,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
   providers: [SourceService, QueryService, DataService]
 })
 export class AddNewsComponentComponent implements OnInit {
-
+  errorMessage: String = null;
   keywords: String[] = [];
   sources: Source[] = [];
   sourceUris: Object[] = [];
@@ -59,8 +59,11 @@ export class AddNewsComponentComponent implements OnInit {
   //submit form to make a new query object and send it to fb
   submitQuery(){
     let newQuery: Query = new Query(this.sourceUris, this.categoryQueryArray, this.keywords);
-
-    this.queryService.addQuery(newQuery);
+    if (newQuery.sourceUris.length > 0 && (newQuery.categories.length > 0 || newQuery.keywords.length > 0 )) {
+      this.queryService.addQuery(newQuery);
+      this.errorMessage = null;
+    }
+    this.errorMessage = "Please select at least one source and at least one category or keyword";
   }
 
   //keyword Input

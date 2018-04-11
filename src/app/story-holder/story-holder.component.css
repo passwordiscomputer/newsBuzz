@@ -5,3 +5,7 @@
 .card a,button{
   width: 100%;
 }
+
+.storyHolder{
+  height: 400px;
+}
