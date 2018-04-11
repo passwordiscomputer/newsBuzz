@@ -7,7 +7,7 @@ enter the following command line prompts
   1. $ git clone https://github.com/passwordiscomputer/newsBuzz.git
   2. $ npm install
   3. $ ng serve --open
-To see check it out online just visit
+To see check it out online just visit https://newsbu-35630.firebaseapp.com/
 ##Prerequisites
 You must have node and angular cli installed
 
