@@ -16,8 +16,8 @@ import { DataService }  from '../services/data.service';
 })
 export class StoryHolderComponent implements OnInit {
   //starting variables
+  results: any;
   @Input() childQueryData;
-
   stories : Story[] = [];
   currentStoryNumber = 0;
   constructor(private queryService: QueryService, private storyService: StoryService) { }
@@ -25,9 +25,10 @@ export class StoryHolderComponent implements OnInit {
   ngOnInit() {
     let query = new Query(this.childQueryData.sourceUris, this.childQueryData.categories, this.childQueryData.keywords);
     this.storyService.getStories(this.queryService.makeUrlArray(query)).subscribe(results =>{
+      this.results = results;
       let i = 0;
       while (this.stories.length < 10) {
-        for (let result of results){
+        for (let result of this.results){
           this.stories.push(new Story(result.articles.results[i].title, result.articles.results[i].url, result.articles.results[i].source.title, result.articles.results[i].body));
         }
         i++;
